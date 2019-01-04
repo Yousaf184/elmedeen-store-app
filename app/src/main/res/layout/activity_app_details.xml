@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/detail_activity_parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.AppDetailsActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/appDetails_toolbar"
+            style="@style/appToolbar"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/colorWhite"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintTop_toBottomOf="@id/appDetails_toolbar"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <ImageView
+                    android:id="@+id/app_title_image_DACT"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:transitionName="sharedImageTrans"/>
+
+                <TextView
+                    android:id="@+id/app_name_text_DACT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="App Name"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorBlack"
+                    app:layout_constraintTop_toTopOf="@id/app_title_image_DACT"
+                    app:layout_constraintStart_toEndOf="@id/app_title_image_DACT"
+                    app:layout_constraintBottom_toBottomOf="@id/app_title_image_DACT"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
+
+                <Button
+                    android:id="@+id/openApp_btn"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/open_app"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/round_button_bg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/app_title_image_DACT"
+                    android:layout_marginTop="15dp"
+                    android:visibility="invisible"
+                    android:onClick="openApp"/>
+
+                <Button
+                    android:id="@+id/install_btn"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/install"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/round_button_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/app_title_image_DACT"
+                    app:layout_constraintTop_toTopOf="@id/openApp_btn"
+                    android:onClick="installOrUninstallApp" />
+
+                <TextView
+                    android:id="@+id/downloaded_bytes_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.3 Mb / 1.62 Mb"
+                    app:layout_constraintTop_toBottomOf="@id/app_title_image_DACT"
+                    app:layout_constraintBottom_toTopOf="@id/download_progress_bar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/downloaded_percent_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30 %"
+                    app:layout_constraintTop_toBottomOf="@id/app_title_image_DACT"
+                    app:layout_constraintBottom_toTopOf="@id/download_progress_bar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"/>
+
+                <ProgressBar
+                    android:id="@+id/download_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    android:indeterminate="true"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:progress="0"
+                    android:max="100"
+                    app:layout_constraintTop_toTopOf="@id/install_btn"
+                    app:layout_constraintBottom_toBottomOf="@id/install_btn"
+                    android:visibility="gone"
+                    android:progressBackgroundTint="@color/colorLightGray"
+                    android:progressTint="@color/colorPrimary"
+                    android:indeterminateTint="@color/colorLightGray"
+                    android:indeterminateTintMode="screen" />
+
+                <View
+                    android:id="@+id/divider_DACT"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLightGray"
+                    app:layout_constraintTop_toBottomOf="@id/install_btn"
+                    android:layout_marginTop="20dp"/>
+
+                <br.com.felix.imagezoom.ImageZoom
+                    android:id="@+id/app_screenshot1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logo"
+                    app:layout_constraintTop_toBottomOf="@id/divider_DACT"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="20dp"/>
+
+                <br.com.felix.imagezoom.ImageZoom
+                    android:id="@+id/app_screenshot2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logo"
+                    app:layout_constraintTop_toBottomOf="@id/app_screenshot1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="17dp" />
+
+                <View
+                    android:id="@+id/divider2_DACT"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLightGray"
+                    app:layout_constraintTop_toBottomOf="@id/app_screenshot2"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/app_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/divider2_DACT"
+                    android:layout_marginTop="20dp"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.design.widget.CoordinatorLayout>
