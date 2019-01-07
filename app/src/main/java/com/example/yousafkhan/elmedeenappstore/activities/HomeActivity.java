@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,7 +31,6 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements RecyclerViewItemClick {
 
-    private static final int GRID_COLUMN_COUNT = 3;
     private ProgressBar progressBar;
     private TextView infoText;
     private Button retryButton;
@@ -95,7 +95,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewItemC
         RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, GRID_COLUMN_COUNT);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, calculateNoOfColumns());
         recyclerView.setLayoutManager(gridLayoutManager);
 
         RcAdapter adapter = new RcAdapter(dataList, this);
@@ -130,5 +130,11 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewItemC
         infoText.setVisibility(View.INVISIBLE);
         retryButton.setVisibility(View.GONE);
         viewmodel.loadAllApps();
+    }
+
+    public int calculateNoOfColumns() {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        return (int) (dpWidth / 190); // 190 is the width of the grid item
     }
 }
