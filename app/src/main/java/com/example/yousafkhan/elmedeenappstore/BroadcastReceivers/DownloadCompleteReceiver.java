@@ -21,8 +21,8 @@ public class DownloadCompleteReceiver extends BroadcastReceiver {
         long downloadID = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
         String action = intent.getAction();
 
-        if(action != null && action.equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-                && downloadID == AppDetailsActivity.downloadID) {
+        if((action != null && action.equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+                && (downloadID == AppDetailsActivity.downloadID)) {
 
             // install the downloaded apk file
             DownloadManager downloadManager =

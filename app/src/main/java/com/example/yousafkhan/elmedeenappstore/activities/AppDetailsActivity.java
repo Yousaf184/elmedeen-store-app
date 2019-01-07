@@ -23,12 +23,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -241,7 +239,7 @@ public class AppDetailsActivity extends AppCompatActivity {
                 // for runtime permission request
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                    if(hasExternalStorageWritePermission()) {
+                    if(MyUtils.hasExternalStorageWritePermission(this)) {
                         animateFadeOut(installAppBtn, shortAnimationDuration);
                         animateFadeIn(downloadProgressBar, mediumAnimationDuration);
                         animateFadeIn(downloadedBytes, mediumAnimationDuration);
@@ -266,7 +264,6 @@ public class AppDetailsActivity extends AppCompatActivity {
     }
 
     private void startAppDownload() {
-        Log.d("tag", "starting app download");
         // broadcast receivers are registered and unregistered using application context
         // because they will be unregistered from another class, if application context
         // is not used, it will cause intent leak exception,
@@ -402,10 +399,10 @@ public class AppDetailsActivity extends AppCompatActivity {
         return state.equals(Environment.MEDIA_MOUNTED);
     }
 
-    private boolean hasExternalStorageWritePermission() {
-        return (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        == PackageManager.PERMISSION_GRANTED);
-    }
+//    private boolean hasExternalStorageWritePermission() {
+//        return (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                        == PackageManager.PERMISSION_GRANTED);
+//    }
 
     private boolean isAppAlreadyInstalled(String appPackageName) {
         boolean isInstalled = true;
@@ -575,7 +572,6 @@ public class AppDetailsActivity extends AppCompatActivity {
 
     // check if any apk file with the same name as the current app
     // exists in the /downloads/store_downloads directory
-
     // if it exists, delete that file
     private void deleteApkFileIfExists() {
         File downloadsDirectory =

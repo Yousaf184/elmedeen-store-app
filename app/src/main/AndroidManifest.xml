@@ -30,6 +30,7 @@
                   android:parentActivityName=".activities.HomeActivity"/>
 
         <service android:name=".services.MyDownloadService" android:exported="false" />
+        <service android:name=".services.AppUpdateService" android:exported="false" />
     </application>
 
 </manifest>
